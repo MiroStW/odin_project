@@ -1,2 +1,2 @@
-nothing to see yet
-now tried new branch
+# odin_project
+my training code from the odin project
