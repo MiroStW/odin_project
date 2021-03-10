@@ -8,33 +8,23 @@ function random (min, max) {
 }
 
 function playRound (playerSelection, computerSelection) {
+    let result;
     if (playerSelection == "rock") {
-        if (computerSelection == "rock") {
-            console.log ("Draw! both chose the same");
-        }
-        else if (computerSelection == "paper") {
-            console.log ("Your lose! Paper beats rock");
-        }
-        else console.log ("You win! Rock beats scissors");
+        result = computerSelection == "rock" ? "draw"
+            : computerSelection == "paper" ? "lost"
+            : "won";
     }
     else if (playerSelection == "paper") {
-        if (computerSelection == "rock") {
-            console.log ("You win! Rock beats paper");
-        }
-        else if (computerSelection == "paper") {
-            console.log ("Draw! both chose the same");
-        }
-        else console.log ("You lose! Scissors beats paper");
+        result = computerSelection == "rock" ? "won"
+            : computerSelection == "paper" ? "draw"
+            : "lost"
     }
     else if (playerSelection == "scissors") {
-        if (computerSelection == "rock") {
-            console.log ("You lose! Rock beats scissors");
-        }
-        else if (computerSelection == "paper") {
-            console.log ("Your win! Scissors beats paper");
-        }
-        else console.log ("Draw! both chose the same");
+        result = computerSelection == "rock" ? "lost"
+            : computerSelection == "paper" ? "won"
+            : "draw"
     }
+    return result
 }
 
 function getPlayerSelection () {
@@ -56,7 +46,26 @@ function getPlayerSelection () {
     }
 }
 
-const playerSelection = getPlayerSelection();
-const computerSelection = computerPlay();
-console.log("Player chose " + playerSelection + ", Computer chose " + computerSelection);
-playRound (playerSelection, computerSelection);
+function game () {
+
+    let ScorePlayer = 0;
+    let ScoreComputer = 0;
+    for (let index = 0; index < 5; index++) {
+        const playerSelection = getPlayerSelection();
+        const computerSelection = computerPlay();
+
+        let result = playRound (playerSelection, computerSelection);
+        result == "won" ? ScorePlayer += 1
+        : result == "lost" ? ScoreComputer += 1
+        : false;
+
+        console.log("Player chose " + playerSelection + ", Computer chose " + computerSelection);
+        console.log(result + "!");
+        console.log(`Score is ${ScorePlayer}:${ScoreComputer}`);
+    }
+
+    ScorePlayer > ScoreComputer ? console.log(`You won with a score of ${ScorePlayer}:${ScoreComputer}`)
+        : ScorePlayer < ScoreComputer ? console.log(`You lost with a score of ${ScorePlayer}:${ScoreComputer}`)
+        : console.log(`Its a draw with a score of ${ScorePlayer}:${ScoreComputer}`)
+
+}
