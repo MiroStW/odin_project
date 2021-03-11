@@ -59,13 +59,14 @@ function game () {
         : result == "lost" ? ScoreComputer += 1
         : false;
 
-        console.log("Player chose " + playerSelection + ", Computer chose " + computerSelection);
+        console.log("Player chose " + playerSelection + ", Computer chose " + 
+                computerSelection);
         console.log(result + "!");
         console.log(`Score is ${ScorePlayer}:${ScoreComputer}`);
     }
 
     ScorePlayer > ScoreComputer ? console.log(`You won with a score of ${ScorePlayer}:${ScoreComputer}`)
-        : ScorePlayer < ScoreComputer ? console.log(`You lost with a score of ${ScorePlayer}:${ScoreComputer}`)
-        : console.log(`Its a draw with a score of ${ScorePlayer}:${ScoreComputer}`)
+            : ScorePlayer < ScoreComputer ? console.log(`You lost with a score of ${ScorePlayer}:${ScoreComputer}`)
+            : console.log(`Its a draw with a score of ${ScorePlayer}:${ScoreComputer}`)
 
 }
