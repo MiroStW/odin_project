@@ -14,8 +14,8 @@
         const para = document.querySelector('p');
 
         for (let i = 0; i < cats.length; i++) {
-            i == cats.length - 1 ? info += cats[i] + ". "
-                    : info += cats[i] + ", ";
+            info += cats[i];
+            i == cats.length - 1 ? info += "." : info += ", ";
         }
 
         para.textContent = info;
