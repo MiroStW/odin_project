@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+      THE TITLE OF YOUR WEBPAGE
+    </h1>
+    <div id="container"></div>
+    <button id="btn">click me</button>
+    <button id="btn2">Click Me Too</button>
+    <button id="btn3" onclick="alert('works too');">now me!</button>
+    <script>
+        // your javascript file
+        const btn = document.querySelector("#btn");
+        btn.onclick = () => alert("hi");
+
+        const btn2 = document.querySelector("#btn2");
+        btn2.addEventListener('click', function (e) {
+            console.log(e);
+            e.target.style.background = randomColor();
+        });
+
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach((button) => {
+            button.addEventListener("keypress", () => {
+                button.style.background = randomColor();
+            })
+        });
+
+        function randomColor () {
+            return "#" + Math.floor(Math.random()*16777215).toString(16);
+        }
+
+        const container = document.querySelector('#container');
+        
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = 'This is the glorious text-content!';
+        container.appendChild(content);
+
+        const para = document.createElement ("p");
+        para.textContent = "Hey I'm red!";
+        para.style.cssText = "color:red";
+        container.appendChild(para);
+
+        const subHead = document.createElement ("h3");
+        subHead.textContent = "I'm a blue h3!";
+        subHead.style.cssText = "color:blue";
+        container.appendChild(subHead);
+        
+        const div = document.createElement ("div");
+        div.style.cssText = "border:black 1px dashed;background-color:pink;";
+        container.appendChild(div);
+        
+        const header = document.createElement ("h1");
+        header.textContent = "I’m in a div";
+        div.appendChild(header);
+
+        const para2 = document.createElement ("p");
+        para2.textContent = "ME TOO!";
+        div.appendChild(para2);
+
+    </script>  
+</body>
+</html>
+
