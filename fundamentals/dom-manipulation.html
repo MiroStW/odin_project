@@ -22,13 +22,13 @@
         const btn2 = document.querySelector("#btn2");
         btn2.addEventListener('click', function (e) {
             console.log(e);
-            e.target.style.background = randomColor();
+            e.target.parentNode.style.background = randomColor();
         });
 
         const buttons = document.querySelectorAll('button');
         buttons.forEach((button) => {
             button.addEventListener("keypress", () => {
-                button.style.background = randomColor();
+                button.parentNode.style.background = randomColor();
             })
         });
 
