@@ -2,3 +2,31 @@ body {
     background:black;
     color:white;
 }
+
+#display {
+    padding: 9px 10px;
+    margin-bottom: 12px;
+    border: white solid 2px;
+    font-family: monospace;
+    font-size: large;
+}
+
+#keys {
+    display: flex;
+}
+
+#numbers {
+    width: 100px;
+}
+
+#operators {
+    width: 40px;
+}
+
+#controls {
+    width: 40px;
+}
+
+button {
+    min-width: 25px;
+}
