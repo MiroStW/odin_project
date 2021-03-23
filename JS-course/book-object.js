@@ -1,3 +1,5 @@
+// initialise
+
 let myLibrary = [];
 
 function Book(title,author,pages,isRead) {
@@ -13,6 +15,8 @@ function Book(title,author,pages,isRead) {
 Book.prototype.sayAuthor = function() {
     console.log(this.author)
 };
+
+//access local storage
 
 if(!localStorage.getItem('myLibrary')) {
     // add demo data
@@ -30,7 +34,15 @@ function populateStorage() {
 
 function restoreLibrary() {
     myLibrary = JSON.parse(localStorage.getItem("myLibrary"),);
+    displayBooks();
 }
+
+//add new books
+
+const newBookBtn = document.querySelector("#newbook");
+newBookBtn.addEventListener("click",() => {
+    addBookToLibrary()
+});
 
 function addBookToLibrary() {
     newBook = Object.create(Book);
@@ -44,19 +56,18 @@ function addBookToLibrary() {
     populateStorage();
 }
 
-const newBookBtn = document.querySelector("#newbook");
-newBookBtn.addEventListener("click",() => {
-    addBookToLibrary()
-    displayBooks()});
+//display library
 
 function displayBooks() {
-    Array.prototype.forEach.call( document.querySelectorAll("div"), function( node ) {
+    //refresh view
+    Array.prototype.forEach.call( document.querySelectorAll(".wrapper div.box"), function( node ) {
         node.parentNode.removeChild( node );
     });
 
     myLibrary.forEach(book => {
-        let bookDiv = document.createElement("div");
-        let propList = document.createElement("ul");
+        const bookDiv = document.createElement("div");
+        bookDiv.classList.add("box");
+        const propList = document.createElement("ul");
         bookDiv.appendChild(propList);
         for (const key in book) {
             if (Object.hasOwnProperty.call(book, key)) {
@@ -66,17 +77,36 @@ function displayBooks() {
                 propList.appendChild(propBullet);
             }
         }
-        let removeBook = document.createElement("button");
-        removeBook.addEventListener("click", () => {
-            myLibrary.splice(myLibrary.indexOf(book),1);
-            confirm("really remove " + book.title + "?") ? bookDiv.remove() : "";
-        })
-        removeBook.textContent="remove book"
-        bookDiv.appendChild(removeBook);
 
-        document.querySelector("body").appendChild(bookDiv);
+        //buttons
+        const btnRow = document.createElement("div")
+        btnRow.classList.add("btnrow");
+
+        //remove button
+        const removeBook = document.createElement("button");
+        removeBook.addEventListener("click", () => {
+            if(confirm("really remove " + book.title + "?")) {
+                myLibrary.splice(myLibrary.indexOf(book),1);
+                populateStorage();
+                bookDiv.remove();
+            } 
+        })
+        removeBook.textContent="❌";
+        btnRow.appendChild(removeBook);
+
+        //toggle isRead button
+        const toggleIsRead = document.createElement("button");
+        toggleIsRead.textContent = book.isRead ? 
+                                   "I didn't read it" : 
+                                   "I read it";
+        toggleIsRead.addEventListener("click", () => {
+            book.isRead = !book.isRead;
+            populateStorage();
+        })
+        btnRow.appendChild(toggleIsRead);
+
+        bookDiv.appendChild(btnRow);
+
+        document.querySelector(".wrapper").appendChild(bookDiv);
     });
 }
-
-
-displayBooks();
