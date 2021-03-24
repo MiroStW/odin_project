@@ -1,0 +1,19 @@
+body {
+    background:black;
+    color:white;
+    font-family: sans-serif;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    gap: 15px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+.header {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-bottom: 15px;
+}
