@@ -95,6 +95,8 @@ const gameBoard = (() => {
 
     const showResult = (winner) => {
         const boardDiv = document.querySelector(".wrapper");
+        const resultPopoverContainer = document.createElement("div");
+        resultPopoverContainer.classList.add("popoverContainer");
         const resultPopover = document.createElement("div");
         resultPopover.classList.add("popover");
 
@@ -115,7 +117,8 @@ const gameBoard = (() => {
         restartBtn.addEventListener("click", () => {resetBoard()});
         resultPopover.appendChild(restartBtn);
         
-        boardDiv.appendChild(resultPopover);
+        resultPopoverContainer.appendChild(resultPopover);
+        boardDiv.appendChild(resultPopoverContainer);
     }
 
     const resetBoard = () => {
