@@ -2,40 +2,47 @@
 
 let myLibrary = [];
 
-function Book(title,author,pages,isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-    this.info = () => {
+class Book {
+    constructor (title,author,pages,isRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
+
+    info() {
         console.log(`${this.title} by ${this.author}, ${this.pages} pages, ${!this.isRead ? "no read yet" : "already read"}`);
+    }
+
+    sayAuthor () {
+        console.log(this.author)
     }
 }
 
-Book.prototype.sayAuthor = function() {
-    console.log(this.author)
-};
-
 //access local storage
+const storeLibrary = ( () => {
+    if(!localStorage.getItem('myLibrary')) {
+        // add demo data
+        myLibrary.push(new Book("The lean startup","Eric Ries",250,true));
+        myLibrary.push(new Book("The hard thing about hard things","Ben Horowitz",300,true));
+        populateStorage();
+    } else {
+        restoreLibrary();
+    }
+      
+    function populateStorage() {
+        localStorage.setItem("myLibrary",JSON.stringify(myLibrary));
+        restoreLibrary();
+    }
+    
+    function restoreLibrary() {
+        myLibrary = JSON.parse(localStorage.getItem("myLibrary"),);
+        displayBooks();
+    }
 
-if(!localStorage.getItem('myLibrary')) {
-    // add demo data
-    myLibrary.push(new Book("The lean startup","Eric Ries",250,true));
-    myLibrary.push(new Book("The hard thing about hard things","Ben Horowitz",300,true));
-    populateStorage();
-} else {
-    restoreLibrary();
-}
-  
-function populateStorage() {
-    localStorage.setItem("myLibrary",JSON.stringify(myLibrary));
-    restoreLibrary();
-}
+    return {populateStorage}
 
-function restoreLibrary() {
-    myLibrary = JSON.parse(localStorage.getItem("myLibrary"),);
-    displayBooks();
-}
+})();
 
 //add new books
 
@@ -53,7 +60,7 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
 
     // save library in local storage
-    populateStorage();
+    storeLibrary.populateStorage();
 }
 
 //display library
@@ -87,7 +94,7 @@ function displayBooks() {
         removeBook.addEventListener("click", () => {
             if(confirm("really remove " + book.title + "?")) {
                 myLibrary.splice(myLibrary.indexOf(book),1);
-                populateStorage();
+                storeLibrary.populateStorage();
                 bookDiv.remove();
             } 
         })
@@ -101,7 +108,7 @@ function displayBooks() {
                                    "I read it";
         toggleIsRead.addEventListener("click", () => {
             book.isRead = !book.isRead;
-            populateStorage();
+            storeLibrary.populateStorage();
         })
         btnRow.appendChild(toggleIsRead);
 
