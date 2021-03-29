@@ -1,2 +1,3 @@
 .DS_Store
 .vscode
+/webpack_test/node_modules
