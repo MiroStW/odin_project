@@ -30,6 +30,19 @@ body {
     height: 100%;
 }
 
+.nav div {
+    border-bottom: 1px white dashed;
+    width: 80%;
+    padding: 8px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.nav div:checked+label {
+    background: #fff;
+    color: #5a5243;
+}
+
   /* .box {
       border: 1px white dashed;
       border-radius: 5%;
