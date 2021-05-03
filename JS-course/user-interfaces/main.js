@@ -71,6 +71,6 @@ const carousellShowNext = () => {
   carousellActive.classList.add('visible');
 }
 
-(() => {
+(function carousellAutoAdvance() {
   setInterval(() => { carousellShowNext();}, 5000);
 })();
