@@ -59,7 +59,9 @@ carousellLeft.addEventListener('click', () => {
 });
 
 const carousellRight = document.querySelector('.carousellRight');
-carousellRight.addEventListener('click', () => {
+carousellRight.addEventListener('click', () => carousellShowNext());
+
+const carousellShowNext = () => {
   carousellActive.classList.remove('visible');
   if (carousellActive.nextElementSibling) {
     carousellActive = carousellActive.nextElementSibling;
@@ -67,4 +69,8 @@ carousellRight.addEventListener('click', () => {
     carousellActive = carousellActive.parentElement.firstElementChild;
   }
   carousellActive.classList.add('visible');
-});
+}
+
+(() => {
+  setInterval(() => { carousellShowNext();}, 5000);
+})();
