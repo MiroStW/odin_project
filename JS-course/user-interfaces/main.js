@@ -1,6 +1,8 @@
 const closeNav = () => {
   const nav = document.querySelector("#nav");
-  const visibleNavElements = document.querySelectorAll("#nav.visible, #nav .visible");
+  const visibleNavElements = document.querySelectorAll(
+    "#nav.visible, #nav .visible"
+  );
   visibleNavElements.forEach((element) => {
     element.classList.remove("visible");
   });
@@ -43,34 +45,63 @@ navCloseBtn.addEventListener("click", () => {
   console.log("navCloseBtn clicked");
 });
 
-const carousellContent = document.querySelector('.carousellContent')
+const carousellContent = document.querySelector(".carousellContent");
 let carousellActive = carousellContent.firstElementChild;
-carousellActive.classList.add('visible');
+carousellActive.classList.add("visible");
 
-const carousellLeft = document.querySelector('.carousellLeft');
-carousellLeft.addEventListener('click', () => {
-  carousellActive.classList.remove('visible');
+const carousellLeft = document.querySelector(".carousellLeft");
+carousellLeft.addEventListener("click", () => {carousellShowPrevious()});
+
+const carousellRight = document.querySelector(".carousellRight");
+carousellRight.addEventListener("click", () => carousellShowNext());
+
+const carousellSetActive = (newActiveElement) => {
+  carousellNav.querySelector(".active").classList.remove("active");
+  carousellActive.classList.remove("visible");
+  carousellActive = newActiveElement;
+  carousellActive.classList.add("visible");
+  carousellActive.parentElement.children.length;
+  const indexOfActive = Array.prototype.indexOf.call(
+    carousellContent.children,
+    carousellActive
+  );
+  const activeNavItem = carousellNav.children.item(indexOfActive);
+  activeNavItem.classList.add("active");
+};
+
+const carousellShowPrevious = () => {
   if (carousellActive.previousElementSibling) {
-    carousellActive = carousellActive.previousElementSibling;
+    carousellSetActive(carousellActive.previousElementSibling);
   } else {
-    carousellActive = carousellActive.parentElement.lastElementChild;
+    carousellSetActive(carousellActive.parentElement.lastElementChild);
   }
-  carousellActive.classList.add('visible');
-});
-
-const carousellRight = document.querySelector('.carousellRight');
-carousellRight.addEventListener('click', () => carousellShowNext());
+};
 
 const carousellShowNext = () => {
-  carousellActive.classList.remove('visible');
   if (carousellActive.nextElementSibling) {
-    carousellActive = carousellActive.nextElementSibling;
+    carousellSetActive(carousellActive.nextElementSibling);
   } else {
-    carousellActive = carousellActive.parentElement.firstElementChild;
+    carousellSetActive(carousellActive.parentElement.firstElementChild);
   }
-  carousellActive.classList.add('visible');
-}
+};
 
-(function carousellAutoAdvance() {
-  setInterval(() => { carousellShowNext();}, 5000);
-})();
+const carousellAutoAdvance = setInterval(carousellShowNext, 5000);
+
+const carousellNav = document.querySelector(".carousellNav");
+for (let i = 0; i < carousellContent.children.length; i++) {
+  const content = carousellContent.children[i];
+  const navItem = document.createElement("div");
+  if (i == 0) {
+    navItem.classList.add('active');
+  }
+  navItem.classList.add("carousellNavItem");
+  // if(i=0) {navItem.classList.add("active");}
+  navItem.addEventListener("click", () => {
+    // carousellNav.querySelector('.active').classList.toggle('active');
+    carousellSetActive(content);
+    clearInterval(carousellAutoAdvance);
+    navItem.classList.add("active");
+  });
+
+  carousellNav.appendChild(navItem);
+}
