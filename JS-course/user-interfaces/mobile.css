@@ -1,0 +1,139 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: black;
+  color: white;
+  font-family: sans-serif;
+}
+
+#content {
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: 15px;
+  padding: 18px;
+  height: 100%;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 15% auto;
+  gap: 15px;
+}
+
+.row {
+  max-height: 100%;
+  overflow: scroll;
+}
+
+.header {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 1px white dashed;
+}
+
+.navIcon {
+  font-size: xx-large;
+}
+
+#nav {
+  display: none;
+  position: absolute;
+  width: 50%;
+  background: black;
+  border-right: 1px white dashed;
+  height: 100%;
+}
+
+#nav.visible {
+  display: block;
+}
+
+.navCloseBtn {
+  background: white;
+  color: black;
+  border-radius: 50%;
+  width: 18px;
+  font-weight: 900;
+  text-align: center;
+  padding: 15px;
+  position: absolute;
+  bottom: 5%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.navItem {
+  border-bottom: 1px white dashed;
+  width: 80%;
+  padding: 8px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.subNavItem {
+  display: none;
+  background: black;
+  padding: 5px;
+  position: relative;
+  left: 100px;
+  border: white 1px solid;
+}
+
+.subNavItem.visible {
+  display: block;
+}
+
+.carousell {
+  position: relative;
+}
+
+.carousellContent img {
+  display: none;
+  width: 100%;
+}
+
+.carousellContent img.visible {
+  display: block;
+}
+
+.carousellLeft, .carousellRight {
+  background: black;
+  border-radius: 50%;
+  width: 18px;
+  font-weight: 900;
+  text-align: center;
+  padding: 15px;
+  position: absolute;
+  top: 50%;
+}
+
+.carousellRight {
+  right:0;
+}
+
+/* .box {
+    border: 1px white dashed;
+    border-radius: 5%;
+    padding: 20px 20px 50px 20px;
+    width: 160px;
+    position: relative;
+} */
+
+button {
+  background-color: black;
+  border: white 1px solid;
+  border-radius: 4px;
+  color: wheat;
+  line-height: 25px;
+  margin-right: 10px;
+}
+
+.btnrow {
+  position: absolute;
+  bottom: 20px;
+}
