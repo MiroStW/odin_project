@@ -1,41 +1,41 @@
 body {
-    background:black;
-    color:white;
-    font-family: sans-serif;
+  background: black;
+  color: white;
+  font-family: sans-serif;
 }
 
 .wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 200px);
-    gap: 15px;
-    max-width: 1080px;
-    margin: 0 auto;
-  }
-
-.header {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding-bottom: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  gap: 15px;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 
-  .box {
-      border: 1px white dashed;
-      border-radius: 5%;
-      padding: 20px 20px 50px 20px;
-      width: 160px;
-      position: relative;
-  }
+.header {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-bottom: 15px;
+}
 
-  button {
-    background-color: black;
-    border: white 1px solid;
-    border-radius: 4px;
-    color: wheat;
-    line-height: 25px;
-    margin-right: 10px;
-  }
+.box {
+  border: 1px white dashed;
+  border-radius: 5%;
+  padding: 20px 20px 50px 20px;
+  width: 160px;
+  position: relative;
+}
 
-  .btnrow {
-    position: absolute;
-    bottom: 20px;
+button {
+  background-color: black;
+  border: white 1px solid;
+  border-radius: 4px;
+  color: wheat;
+  line-height: 25px;
+  margin-right: 10px;
+}
+
+.btnrow {
+  position: absolute;
+  bottom: 20px;
 }
