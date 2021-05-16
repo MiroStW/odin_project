@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: [
     './src/index.js',
-    './dist/style.css'
+    './dist/style.css',
   ],
   module: {
     rules: [
