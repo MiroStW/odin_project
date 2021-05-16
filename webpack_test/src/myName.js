@@ -1,3 +1,3 @@
-const myName = (name) => 'Hi! My name is ' + name;
+const myName = (name) => `Hi! My name is ${name}`;
 
-export default myName
+export default myName;
