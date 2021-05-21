@@ -42,19 +42,23 @@ const img = document.createElement('img');
 const error = document.createElement('p');
 const btn = document.createElement('button');
 
-const getGif = (type) => {
+const getGif = async (type) => {
+  error.textContent = null;
   if (!type || type === ' ') {
     error.textContent = 'Please enter something to search for';
   } else {
-    fetch(`https://api.giphy.com/v1/gifs/translate?api_key=EhJl9gN4xMqQljMllLwlEFzlQQOgIScf&s=${type}`,
-      { mode: 'cors' })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.data.length === 0) return Promise.reject(new Error('bad query'));
-        if (response.meta.status !== 200) return Promise.reject(new Error('something bad happened - sorry!'));
-        img.src = response.data.images.original.url;
-      })
-      .catch((err) => { error.textContent = err; });
+    try {
+      const response = await fetch(
+        `https://api.giphy.com/v1/gifs/translate?api_key=EhJl9gN4xMqQljMllLwlEFzlQQOgIScf&s=${type}`,
+        { mode: 'cors' },
+      );
+      const giphyData = await response.json();
+      if (giphyData.data.length === 0) throw Error('bad query');
+      if (giphyData.meta.status !== 200) throw Error('something bad happened - sorry!');
+      img.src = giphyData.data.images.original.url;
+    } catch (err) {
+      error.textContent = err;
+    }
   }
 };
 
