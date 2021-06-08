@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class App extends React.Component {
+export default class Counter extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,14 +15,13 @@ export default class App extends React.Component {
     this.setState({
       count: this.state.count + 1,
     });
-    console.log(this.state.count);
   }
 
   render() {
     return (
-      <div className="content">
-        <h1>{this.props.title} - welcome!</h1>
+      <div className="counter">
         <button onClick={this.increaseCounter}>Click Me!</button>
+        <p>{this.state.count}</p>
       </div>
     );
   }
