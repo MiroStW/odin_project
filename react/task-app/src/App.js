@@ -49,7 +49,7 @@ class App extends React.Component {
     this.setState((prevState) => ({
       tasks: prevState.tasks.filter((t) => t.id !== task.id),
     }));
-    // TODO recalculate order after delete
+    this.recalcOrder();
   }
 
   editTask(task, newTaskTitle) {
@@ -66,12 +66,26 @@ class App extends React.Component {
     }));
   }
 
+  recalcOrder() {
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.map((t, i) => {
+        t = {
+          title: t.title,
+          id: t.id,
+          order: i + 1,
+        };
+        return t;
+      }),
+    }));
+  }
+
   render() {
     return (
       <div className="App">
         <div className="tasks">
-          {this.state.tasks.map((task) => (
+          {this.state.tasks.map((task, i) => (
             <ShowTask
+              key={i}
               task={task}
               deleteTask={this.deleteTask}
               editTask={this.editTask}
@@ -97,7 +111,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// handle the input field with the logic
-// render an input field and a submit button
-// add the content from your input to a “tasks array” that is managed in state

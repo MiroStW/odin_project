@@ -26,8 +26,8 @@ class ShowTask extends React.Component {
       return (
         <div key={task.id}>
           {task.order}. {task.title}
-          <DeleteBtn task={task} deleteTask={this.props.deleteTask} />
           <EditBtn task={task} setEditMode={this.setEditMode} />
+          <DeleteBtn task={task} deleteTask={this.props.deleteTask} />
         </div>
       );
     } else {
@@ -59,6 +59,3 @@ class ShowTask extends React.Component {
 }
 
 export default ShowTask;
-
-// just render our tasks
-// use .map to map over task array - provide a unique key to each item
