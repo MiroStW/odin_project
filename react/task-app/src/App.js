@@ -1,5 +1,5 @@
 import React from "react";
-import Overview from "./components/Overview";
+import ShowTask from "./components/ShowTask";
 import uniqid from "uniqid";
 
 class App extends React.Component {
@@ -18,6 +18,7 @@ class App extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.addTask = this.addTask.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.editTask = this.editTask.bind(this);
   }
 
   handleInput(e) {
@@ -48,16 +49,40 @@ class App extends React.Component {
     this.setState((prevState) => ({
       tasks: prevState.tasks.filter((t) => t.id !== task.id),
     }));
+    // TODO recalculate order after delete
+  }
+
+  editTask(task, newTaskTitle) {
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.map((t) => {
+        if (t === task)
+          t = {
+            title: newTaskTitle,
+            id: t.id,
+            order: t.order,
+          };
+        return t;
+      }),
+    }));
   }
 
   render() {
     return (
       <div className="App">
-        <Overview tasks={this.state.tasks} deleteTask={this.deleteTask} />
+        <div className="tasks">
+          {this.state.tasks.map((task) => (
+            <ShowTask
+              task={task}
+              deleteTask={this.deleteTask}
+              editTask={this.editTask}
+            />
+          ))}
+        </div>
+
         <input
           type="text"
           onChange={this.handleInput}
-          value={this.state.task.text}
+          value={this.state.task.title}
         />
         <button
           onClick={() => {

@@ -4,10 +4,6 @@
 import React from "react";
 
 class DeleteBtn extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { task } = this.props;
     return (
