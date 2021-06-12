@@ -8,14 +8,10 @@ class DeleteBtn extends React.Component {
     super(props);
   }
 
-  deleteTask = () => {
-    console.log(this.props.task);
-    //TODO figure out how to delete sth from TASKS array here...
-  };
-
   render() {
+    const { task } = this.props;
     return (
-      <button className="deleteBtn" onClick={this.deleteTask}>
+      <button className="deleteBtn" onClick={() => this.props.deleteTask(task)}>
         delete
       </button>
     );

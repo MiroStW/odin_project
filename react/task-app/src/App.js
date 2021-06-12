@@ -14,9 +14,13 @@ class App extends React.Component {
       },
       tasks: [],
     };
+
+    this.handleInput = this.handleInput.bind(this);
+    this.addTask = this.addTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
-  handleInput = (e) => {
+  handleInput(e) {
     this.setState({
       task: {
         title: e.target.value,
@@ -24,11 +28,11 @@ class App extends React.Component {
         order: this.state.tasks.length + 1,
       },
     });
-  };
+  }
 
-  addTask = () => {
-    this.setState((oldState) => ({
-      tasks: oldState.tasks.concat(oldState.task),
+  addTask() {
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.concat(prevState.task),
       task: {
         title: "",
         id: uniqid(),
@@ -38,12 +42,18 @@ class App extends React.Component {
     const input = document.querySelector("input");
     input.value = null;
     input.focus();
-  };
+  }
+
+  deleteTask(task) {
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.filter((t) => t.id !== task.id),
+    }));
+  }
 
   render() {
     return (
       <div className="App">
-        <Overview tasks={this.state.tasks} />
+        <Overview tasks={this.state.tasks} deleteTask={this.deleteTask} />
         <input
           type="text"
           onChange={this.handleInput}
