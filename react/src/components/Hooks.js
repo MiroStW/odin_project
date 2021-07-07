@@ -9,21 +9,19 @@ import React, { useState, useEffect, Component } from "react";
 const Hooks = () => {
   const [color, setColor] = useState("black");
 
-  useEffect(() => {
-    const changeColor = () => {
-      color === "black" ? setColor("red") : setColor("black");
-    };
+  const changeColor = () => {
+    color === "black" ? setColor("red") : setColor("black");
+  };
 
+  useEffect(() => {
     document
       .querySelector("#myDiv")
       .addEventListener("click", () => changeColor());
 
-    return () => {
-      document
-        .querySelector("#myDiv")
-        .removeEventListener("click", () => changeColor());
-    };
-  }, [color]);
+    return document
+      .querySelector("#myDiv")
+      .removeEventListener("click", () => changeColor());
+  }, []);
 
   return (
     <div>
