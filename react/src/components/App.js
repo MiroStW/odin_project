@@ -1,65 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import Counter from "./Counter";
 import Time from "./Time";
 import Hooks from "./Hooks";
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = (props) => {
+  const [mount, setMount] = useState(true);
+  const [ignoreProp, setIgnoreProp] = useState(0);
+  const [seed, setSeed] = useState(40);
+  const [showErrorComponent, setShowErrorComponent] = useState(false);
 
-    this.state = {
-      mount: true,
-      ignoreProp: 0,
-      seed: 40,
-      showErrorComponent: false,
-    };
+  const ramdomizeIgnoreProp = () => setIgnoreProp(Math.random());
+  const seedGenerator = () => setSeed(Number.parseInt(Math.random() * 100));
+  const toggleError = () => setShowErrorComponent(!showErrorComponent);
 
-    this.mountCounter = () => this.setState({ mount: true });
-    this.unmountCounter = () => this.setState({ mount: false });
-
-    this.ignoreProp = () => this.setState({ ignoreProp: Math.random() });
-    this.seedGenerator = () =>
-      this.setState({ seed: Number.parseInt(Math.random() * 100) });
-    this.toggleError = () =>
-      this.setState({ showErrorComponent: !this.state.showErrorComponent });
-  }
-  render() {
-    return (
-      <div className="content">
-        <h1>{this.props.title}</h1>
-        <p>
-          Please welcome our newest users:{" "}
-          {this.props.userNames.map(
-            (userName, i) =>
-              userName + (i + 1 !== this.props.userNames.length ? ", " : "!")
-          )}
-        </p>
-        <div>
-          <button onClick={this.mountCounter} disabled={this.state.mount}>
-            Mount Counter
-          </button>
-          <button onClick={this.unmountCounter} disabled={!this.state.mount}>
-            Unmount Counter
-          </button>
-          <button onClick={this.ignoreProp}>Ignore Prop</button>
-          <button onClick={this.seedGenerator}>Generate Seed</button>
-          <button onClick={this.toggleError}>Toggle Error</button>
-        </div>
-        {this.state.mount ? (
-          <Counter
-            ignoreProp={this.state.ignoreProp}
-            seed={this.state.seed}
-            showErrorComponent={this.state.showErrorComponent}
-          />
-        ) : null}
-        <Time />
-        <Hooks />
+  return (
+    <div className="content">
+      <h1>{props.title}</h1>
+      <p>
+        Please welcome our newest users:{" "}
+        {props.userNames.map(
+          (userName, i) =>
+            userName + (i + 1 !== props.userNames.length ? ", " : "!")
+        )}
+      </p>
+      <div>
+        <button onClick={() => setMount(true)} disabled={mount}>
+          Mount Counter
+        </button>
+        <button onClick={() => setMount(false)} disabled={!mount}>
+          Unmount Counter
+        </button>
+        <button onClick={() => ramdomizeIgnoreProp()}>Ignore Prop</button>
+        <button onClick={() => seedGenerator()}>Generate Seed</button>
+        <button onClick={() => toggleError()}>Toggle Error</button>
       </div>
-    );
-  }
-}
+      {mount ? (
+        <Counter
+          ignoreProp={ignoreProp}
+          seed={seed}
+          showErrorComponent={showErrorComponent}
+        />
+      ) : null}
+      <Time />
+      <Hooks />
+    </div>
+  );
+};
 
 App.defaultProps = {
   title: "Welcome!",
   userNames: ["Max", "Moritz", "Fritz"],
 };
+
+export default App;

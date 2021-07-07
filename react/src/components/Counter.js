@@ -1,8 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const ErrorComponent = () => <div>{props.ignore}</div>;
 
-export default class Counter extends React.Component {
+// rewrote Counter to hooks where possible
+// const Counter = (props) => {
+//   const [count, setCount] = useState(0);
+//   const [seed, setSeed] = useState(0);
+
+//   useEffect(() => {
+//     console.log("componentDidMount");
+//     console.log("---------------------");
+
+//     return (
+//       <>
+//         console.log("componentWillUnmount");
+//         console.log("---------------------");
+//       </>
+//     );
+//   }, []);
+
+//   useEffect(() => {
+//     console.log("componentDidUpdate");
+//     console.log("---------------------");
+//   });
+
+//   const increaseCounter = () => {
+//     setCount(count + 1);
+//   };
+//   try {
+//     return (
+//       <div className="counter">
+//         <button onClick={() => increaseCounter()}>Click Me!</button>
+//         <p>Counter: {count}</p>
+//         {props.showErrorComponent ? <ErrorComponent /> : null}
+//       </div>
+//     );
+//   } catch (error) {
+//     console.log("render", error);
+//     return <div>We have encountered an error! {error.message}</div>;
+//   }
+// };
+
+class Counter extends React.Component {
   constructor(props) {
     console.log("constructor");
     super(props);
@@ -87,3 +126,5 @@ export default class Counter extends React.Component {
     this.setState({ error, info });
   }
 }
+
+export default Counter;

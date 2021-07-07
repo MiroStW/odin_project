@@ -1,35 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export default class Time extends React.Component {
-  constructor(props) {
-    super(props);
+const Time = (props) => {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
 
-    this.state = {
-      time: new Date().toLocaleTimeString(),
-    };
+  useEffect(() => {
+    let timerID = setInterval(() => {
+      setTimer();
+    }, 1000);
+    return () => clearInterval(timerID);
+  }, []);
 
-    this.setTimer = this.setTimer.bind(this);
-  }
+  const setTimer = () => {
+    setTime(new Date().toLocaleTimeString());
+  };
 
-  componentDidMount() {
-    this.timerID = setInterval(() => this.setTimer(), 1000);
-  }
+  return (
+    <div className="time">
+      <p>It is {time}</p>
+    </div>
+  );
+};
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  setTimer() {
-    this.setState({
-      time: new Date().toLocaleTimeString(),
-    });
-  }
-
-  render() {
-    return (
-      <div className="time">
-        <p>It is {this.state.time}</p>
-      </div>
-    );
-  }
-}
+export default Time;

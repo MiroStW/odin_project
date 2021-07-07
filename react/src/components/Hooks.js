@@ -14,10 +14,14 @@ const Hooks = () => {
       color === "black" ? setColor("red") : setColor("black");
     };
 
-    document.addEventListener("click", () => changeColor());
+    document
+      .querySelector("#myDiv")
+      .addEventListener("click", () => changeColor());
 
     return () => {
-      document.removeEventListener("click", () => changeColor());
+      document
+        .querySelector("#myDiv")
+        .removeEventListener("click", () => changeColor());
     };
   }, [color]);
 
