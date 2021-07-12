@@ -23,6 +23,11 @@ const Nav = () => {
           Lifecycle
         </NavLink>
       </div>
+      <div className="navitem">
+        <NavLink to="/hooks" className="vcenter">
+          Hooks
+        </NavLink>
+      </div>
     </div>
   );
 };

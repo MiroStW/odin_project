@@ -62,3 +62,7 @@ a {
   text-decoration: none;
   padding-bottom: 4px;
 }
+
+#container {
+  display: grid;
+}
