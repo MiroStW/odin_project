@@ -1,5 +1,5 @@
 {
-  "name": "react testing",
+  "name": "react-testing",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "build:prod": "webpack -p",
-    "watch": "webpack --watch",
     "serve": "webpack serve"
   },
   "author": "",

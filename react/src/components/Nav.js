@@ -1,20 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Nav = () => {
   return (
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/counter">Counter</Link>
-        </li>
-        <li>
-          <Link to="/time">Time</Link>
-        </li>
-      </ul>
+    <div id="nav">
+      <Link to="/" id="logo">
+        <div id="icon"></div>
+        <div className="vcenter">React</div>
+      </Link>
+      <div className="navitem">
+        <NavLink to="/counter" className="vcenter">
+          Counter
+        </NavLink>
+      </div>
+      <div className="navitem">
+        <NavLink to="/time" className="vcenter">
+          Time
+        </NavLink>
+      </div>
+      <div className="navitem">
+        <NavLink to="/lifecycle" className="vcenter">
+          Lifecycle
+        </NavLink>
+      </div>
     </div>
   );
 };

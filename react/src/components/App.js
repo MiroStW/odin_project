@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Counter from "./Counter";
 import Time from "./Time";
 import Hooks from "./Hooks";
@@ -12,6 +12,10 @@ const App = (props) => {
   const ramdomizeIgnoreProp = () => setIgnoreProp(Math.random());
   const seedGenerator = () => setSeed(Number.parseInt(Math.random() * 100));
   const toggleError = () => setShowErrorComponent(!showErrorComponent);
+
+  useEffect(() => {
+    console.log(`new seed: ${seed}`);
+  }, [seed]);
 
   return (
     <div className="content">
