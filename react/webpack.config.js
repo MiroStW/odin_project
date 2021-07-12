@@ -1,53 +1,55 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
-  entry: [
-    './src/index.js',
-    './src/style.css',
-  ],
+  mode: "development",
+  entry: ["./src/index.js", "./src/style.css"],
   output: {
-    filename: '[name].js', // filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, 'dist/app/'),
+    filename: "[name].js", // filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
     clean: true,
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader', 
+          loader: "babel-loader",
           options: {
             presets: [
-              ['@babel/preset-env', { targets: 'defaults' }],
-              ['@babel/preset-react', { development: true }],
+              ["@babel/preset-env", { targets: "defaults" }],
+              ["@babel/preset-react", { development: true }],
             ],
           },
         },
       },
     ],
   },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: "./dist",
+    // publicPath: "/odin_project/react/dist/",
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'React test app',
-      template: './src/index.html',
+      template: "./src/index.html",
     }),
   ],
   optimization: {
-    moduleIds: 'deterministic',
-    runtimeChunk: 'single',
+    moduleIds: "deterministic",
+    runtimeChunk: "single",
     splitChunks: {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
+          name: "vendors",
+          chunks: "all",
         },
       },
     },

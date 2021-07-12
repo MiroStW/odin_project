@@ -10,9 +10,9 @@ const Routes = () => {
     <Router>
       <Nav />
       <Switch>
-        <Route path="/" exact component={App} />
-        <Route path="/counter" exact component={Counter} />
-        <Route path="/time" exact component={Time} />
+        <Route path={`/`} exact component={App} />
+        <Route path={`/counter`} component={Counter} />
+        <Route path={`/time`} component={Time} />
       </Switch>
     </Router>
   );
