@@ -14,7 +14,7 @@ body {
 
 #logo {
   display: grid;
-  grid-template-columns: 35px 35px;
+  grid-template-columns: 35px max-content;
   gap: 10px;
   color: #61dafb;
   font-weight: 700;
@@ -46,6 +46,7 @@ body {
   border-top: 2px transparent solid;
   text-align: center;
   display: grid;
+  padding: 0 5px;
 }
 
 a.active {
