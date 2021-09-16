@@ -33,6 +33,3 @@ const Nav = () => {
 };
 
 export default Nav;
-
-// berlin, less common background, founder for 8 years, CSS tailwind, grid
-// ress boss syntax podcast / courses
